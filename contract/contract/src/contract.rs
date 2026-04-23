@@ -175,12 +175,26 @@ impl CrowdfundingTrait for FundEduContract {
         CrowdfundingContract::get_pool_metadata(env, pool_id)
     }
 
+    fn get_pool_balance(env: Env, pool_id: u64) -> Result<i128, CrowdfundingError> {
+        CrowdfundingContract::get_pool_balance(env, pool_id)
+    }
+
+    fn update_pool_metadata_hash(
+        env: Env,
+        pool_id: u64,
+        caller: Address,
+        new_hash: String,
+    ) -> Result<(), CrowdfundingError> {
+        CrowdfundingContract::update_pool_metadata_hash(env, pool_id, caller, new_hash)
+    }
+
     fn update_pool_state(
         env: Env,
         pool_id: u64,
+        caller: Address,
         new_state: PoolState,
     ) -> Result<(), CrowdfundingError> {
-        CrowdfundingContract::update_pool_state(env, pool_id, new_state)
+        CrowdfundingContract::update_pool_state(env, pool_id, caller, new_state)
     }
 
     fn set_crowdfunding_token(env: Env, token: Address) -> Result<(), CrowdfundingError> {
@@ -264,6 +278,14 @@ impl CrowdfundingTrait for FundEduContract {
 
     fn is_closed(env: Env, pool_id: u64) -> Result<bool, CrowdfundingError> {
         CrowdfundingContract::is_closed(env, pool_id)
+    }
+
+    fn reject_cause(env: Env, cause: Address) -> Result<(), CrowdfundingError> {
+        CrowdfundingContract::reject_cause(env, cause)
+    }
+
+    fn claim_pool_funds(env: Env, pool_id: u64, student: Address) -> Result<(), CrowdfundingError> {
+        CrowdfundingContract::claim_pool_funds(env, pool_id, student)
     }
 
     fn renounce_admin(env: Env) -> Result<(), CrowdfundingError> {

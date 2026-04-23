@@ -340,6 +340,8 @@ pub enum StorageKey {
     EventMetrics(BytesN<32>),
     // Locked token balance deposited by the sponsor at pool creation
     PoolBalance(u64),
+    // Track claimed amounts per student per pool for streaming claims
+    StudentClaimed(u64, Address),
 }
 
 #[cfg(test)]

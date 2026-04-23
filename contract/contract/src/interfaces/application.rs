@@ -49,4 +49,15 @@ pub trait ApplicationTrait {
         pool_id: u64,
         applicant: Address,
     ) -> Result<ApplicationDetails, CrowdfundingError>;
+
+    /// Claim funds for an approved scholarship application.
+    ///
+    /// Students can claim their approved funding linearly based on milestones.
+    /// The claim amount must not exceed the available balance for the student.
+    fn claim_funds(
+        env: Env,
+        student: Address,
+        pool_id: u64,
+        claim_amount: i128,
+    ) -> Result<(), CrowdfundingError>;
 }
